@@ -1,987 +1,1016 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ernie Hsiung - AI Services Without the Hype</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        /* Typography - Headings use a distinctive system font stack */
-        h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; }
-
-        .logo {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #4a5568;
-        }
-
-        .tier-title {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-        }
-
-        .tab-button {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: none;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #718096;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #4a5568;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 1rem 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* About Section */
-        .about {
-            background: #f8fafc;
-            padding: 4rem 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .about-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #2d3748;
-            text-align: center;
-            grid-column: 1 / -1;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .headshot-placeholder {
-            width: 280px;
-            height: 280px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-            margin: 0 auto;
-        }
-
-        .headshot-placeholder:hover {
-            transform: scale(1.02);
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #4a5568;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        .location-note {
-            font-style: italic;
-            color: #718096;
-        }
-
-        /* Services Section */
-        .services {
-            background: white;
-            padding: 4rem 0;
-        }
-
-        .services h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2d3748;
-        }
-
-        /* Tab Navigation */
-        .tab-navigation {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 3rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .tab-button {
-            background: none;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #718096;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tab-button:hover {
-            color: #4a5568;
-        }
-
-        .tab-button.active {
-            color: #2d3748;
-            border-bottom-color: #667eea;
-        }
-
-        .tab-icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-        }
-
-        .tab-icon.entry {
-            background: #48bb78;
-        }
-
-        .tab-icon.core {
-            background: #ed8936;
-        }
-
-        .tab-icon.advanced {
-            background: #e53e3e;
-        }
-
-        /* Tab Content */
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .service-tier {
-            margin-bottom: 0;
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 2rem;
-            border-left: 6px solid;
-        }
-
-        .service-tier.entry {
-            border-left-color: #48bb78;
-        }
-
-        .service-tier.core {
-            border-left-color: #ed8936;
-        }
-
-        .service-tier.advanced {
-            border-left-color: #e53e3e;
-        }
-
-        .tier-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .tier-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
-
-        .tier-icon.entry {
-            background: #48bb78;
-        }
-
-        .tier-icon.core {
-            background: #ed8936;
-        }
-
-        .tier-icon.advanced {
-            background: #e53e3e;
-        }
-
-        .tier-title {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-        }
-
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .service-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #2d3748;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .service-icon {
-            font-size: 1.5rem;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: inline-block;
-        }
-
-        .service-card .subtitle {
-            color: #4a5568;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .ideal-for {
-            background: #edf2f7;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #4a5568;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .service-features {
-            list-style: none;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #4a5568;
-        }
-
-        .service-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #48bb78;
-            font-weight: bold;
-        }
-
-        .story-snapshot {
-            background: #f7fafc;
-            border-left: 4px solid #e2e8f0;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
-            font-style: italic;
-            color: #4a5568;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .story-snapshot strong {
-            color: #2d3748;
-            font-style: normal;
-        }
-
-        /* Contact Form Styles */
-        .contact-options {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-            align-items: start;
-        }
-
-        .contact-form-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .contact-form-container h3 {
-            margin-bottom: 1.5rem;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .direct-contact {
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .direct-contact h3 {
-            margin-bottom: 1.5rem;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-        }
-
-        .form-submit-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .form-submit-btn:hover {
-            background: #5a6fd8;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-button.primary {
-            background: #667eea;
-            border-color: #667eea;
-        }
-
-        .cta-button.secondary {
-            background: transparent;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: #2d3748;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .service-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 2rem 0;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .about {
-                padding: 2rem 0;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .about h2 {
-                font-size: 2rem;
-            }
-
-            .headshot-placeholder {
-                width: 200px;
-                height: 200px;
-            }
-
-            .about-text p {
-                font-size: 1rem;
-                text-align: left;
-            }
-
-            .service-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-card {
-                padding: 1.5rem;
-            }
-
-            .services {
-                padding: 2rem 0;
-            }
-
-            .cta-section {
-                padding: 2rem 0;
-            }
-
-            .contact-options {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .tier-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-
-            .service-tier {
-                padding: 1.5rem;
-            }
-
-            .service-card {
-                padding: 1rem;
-            }
-
-            .services h2 {
-                font-size: 2rem;
-            }
-
-            .cta-section h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ernie Hsiung — AI Services Without the Hype</title>
+  <meta name="description" content="Practical AI guidance, smart automation, and lightweight tools that make LLMs actually useful. From education to full-stack development." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Public+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-base: #f9f8f4;
+      --bg-surface: #f0ede4;
+      --bg-dark: #1a2018;
+      --bg-dark-surface: #252d22;
+
+      --green-deep: #2d5a27;
+      --green-mid: #3d7a35;
+      --green-bright: #4e9944;
+      --green-muted: #7aad72;
+      --green-pale: #d4eacf;
+      --green-faint: #edf5eb;
+
+      --text-primary: #1a2018;
+      --text-secondary: #4a5548;
+      --text-muted: #7a8878;
+      --text-on-dark: #e8ede6;
+      --text-on-dark-muted: #9aaa96;
+
+      --accent: #4e9944;
+      --accent-hover: #3d7a35;
+
+      --font-display: 'Fraunces', 'Palatino Linotype', serif;
+      --font-body: 'Public Sans', 'Verdana', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+      --max-w: 1100px;
+      --radius: 10px;
+      --transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--green-pale);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--green-deep); }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      background: var(--bg-dark);
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem 5rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 60%, rgba(78, 153, 68, 0.18) 0px, transparent 55%),
+        radial-gradient(ellipse at 85% 20%, rgba(45, 90, 39, 0.25) 0px, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-muted);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.7s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 600;
+      line-height: 1.08;
+      color: var(--text-on-dark);
+      letter-spacing: -0.02em;
+      max-width: 780px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.7s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-muted);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-on-dark-muted);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.7s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--green-bright);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius);
+      letter-spacing: 0.01em;
+      transition: background var(--transition), transform var(--transition);
+      opacity: 0;
+      animation: fadeInUp 0.7s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-cta:hover {
+      background: var(--green-deep);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────────── */
+    section { padding: 5rem 2rem; }
+
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────── */
+    #about { background: var(--bg-base); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: var(--radius);
+      filter: grayscale(15%);
+      border: 3px solid var(--green-pale);
+    }
+
+    .about-body p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ── CASE STUDY ──────────────────────────────────────────── */
+    #case-study {
+      background: var(--bg-dark);
+      color: var(--text-on-dark);
+    }
+
+    .case-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-muted);
+      margin-bottom: 1rem;
+    }
+
+    .case-study-card {
+      background: var(--bg-dark-surface);
+      border: 1px solid rgba(78, 153, 68, 0.2);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .case-header {
+      padding: 2.5rem 2.5rem 2rem;
+      border-bottom: 1px solid rgba(78, 153, 68, 0.15);
+    }
+
+    .case-client {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .case-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-on-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .case-tagline {
+      color: var(--text-on-dark-muted);
+      font-size: 1rem;
+      max-width: 620px;
+    }
+
+    .case-body {
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .case-section-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--green-muted);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .case-body p, .case-body li {
+      color: var(--text-on-dark-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .case-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .case-body ul li {
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.35rem;
+    }
+
+    .case-body ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green-bright);
+      font-size: 0.8rem;
+    }
+
+    .case-stack {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(78, 153, 68, 0.12);
+    }
+
+    .stack-chip {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.7rem;
+      background: rgba(78, 153, 68, 0.12);
+      border: 1px solid rgba(78, 153, 68, 0.25);
+      border-radius: 2px;
+      color: var(--green-muted);
+    }
+
+    .case-quote {
+      grid-column: 1 / -1;
+      border-left: 3px solid var(--green-bright);
+      padding: 1.25rem 1.5rem;
+      background: rgba(78, 153, 68, 0.06);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .case-quote blockquote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-on-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .case-quote cite {
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--text-on-dark-muted);
+    }
+
+    .case-metrics {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(78, 153, 68, 0.15);
+      border: 1px solid rgba(78, 153, 68, 0.15);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .metric {
+      background: var(--bg-dark-surface);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--green-bright);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      color: var(--text-on-dark-muted);
+      line-height: 1.3;
+    }
+
+    .case-footer {
+      padding: 1.25rem 2.5rem;
+      border-top: 1px solid rgba(78, 153, 68, 0.12);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .case-link {
+      font-size: 0.85rem;
+      color: var(--green-muted);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(78, 153, 68, 0.3);
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    .case-link:hover {
+      color: var(--green-bright);
+      border-color: var(--green-bright);
+    }
+
+    /* ── SERVICES ────────────────────────────────────────────── */
+    #services { background: var(--bg-base); }
+
+    .tier-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius);
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .tier-tab {
+      padding: 0.6rem 1.4rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      font-family: var(--font-body);
+    }
+
+    .tier-tab.active {
+      background: var(--green-deep);
+      color: #fff;
+    }
+
+    .tier-tab:hover:not(.active) {
+      background: var(--green-faint);
+      color: var(--green-deep);
+    }
+
+    .tier-panel { display: none; }
+    .tier-panel.active { display: block; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .service-card:hover {
+      border-color: var(--green-muted);
+      box-shadow: 0 4px 20px rgba(45, 90, 39, 0.08);
+    }
+
+    .service-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .service-for {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .service-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-bullets li {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+
+    .service-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--green-bright);
+      font-size: 0.75rem;
+      top: 0.05em;
+    }
+
+    .service-snapshot {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--green-pale);
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────────────── */
+    #contact {
+      background: var(--green-faint);
+      border-top: 1px solid var(--green-pale);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-intro p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contact-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--green-deep);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .contact-option:hover { color: var(--green-bright); }
+
+    .contact-option .icon {
+      width: 32px;
+      height: 32px;
+      background: var(--green-pale);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition);
+    }
+
+    .contact-option:hover .icon { background: var(--green-muted); }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    input, textarea {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--text-primary);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(78, 153, 68, 0.12);
+    }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    .btn-submit {
+      align-self: flex-start;
+      background: var(--green-deep);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: var(--green-mid);
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--bg-dark);
+      color: var(--text-on-dark-muted);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--green-muted);
+      text-decoration: none;
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 200px; }
+      .case-body { grid-template-columns: 1fr; }
+      .case-metrics { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .case-footer { flex-direction: column; align-items: flex-start; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Ernie Hsiung</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Ernie Hsiung</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#case-study">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">AI Consultancy · Bay Area &amp; Remote</p>
+      <h1>Harness AI Power<br /><em>Without the Hype</em></h1>
+      <p class="hero-sub">Practical AI guidance, smart automation, and lightweight tools that make LLMs actually useful — from education to full-stack development.</p>
+      <a href="https://calendly.com/ernieatlyd" class="hero-cta" target="_blank" rel="noopener">Book a Free Consultation</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <img src="./headshot-linkedin-square.jpg" alt="Ernie Hsiung" class="about-photo" />
+        </div>
+        <div class="about-body">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Developer. Educator.<br />Explainer of Complicated Things.</h2>
+          <p>I'm Ernie Hsiung — my career has taken me from coding at startups and civic tech projects to teaching hundreds of new developers how to build their first web apps, and now helping people understand and actually use AI without needing a PhD or a VC check.</p>
+          <p>I've built voice agents powered by ElevenLabs and Twilio, created custom GPT workflows, and trained everyone from individual entrepreneurs to nonprofit operations teams on practical AI implementation. I combine full-stack development skills with UX design intuition, plus extensive experience explaining complex concepts in plain English.</p>
+          <p>People say I'm especially good at translating technical ideas for non-technical people. I say I'm just obsessed with making sure things make sense and work well. I'm based in the Bay Area, but work remotely with clients everywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section id="case-study">
+    <div class="section-inner">
+      <p class="case-label">Client Work</p>
+      <h2 class="section-title" style="color: var(--text-on-dark); margin-bottom: 2rem;">The Theater That Stopped Ringing</h2>
+
+      <div class="case-study-card">
+        <div class="case-header">
+          <p class="case-client">O Cinema · Miami, FL · Arts Nonprofit</p>
+          <h3 class="case-title">A 24/7 bilingual voice agent<br />for $35/month</h3>
+          <p class="case-tagline">O Cinema had no working phone system for three years. Tourists couldn't call ahead. Spanish-speaking patrons were shut out. Staff drowned in repetitive email inquiries. Three weeks later, that was fixed.</p>
+        </div>
+
+        <div class="case-body">
+          <div>
+            <p class="case-section-title">The Problem</p>
+            <ul>
+              <li>No working phone for 3 years — callers got silence, not voicemail</li>
+              <li>Email-only contact in a city where 70% of households speak Spanish at home</li>
+              <li>Lost revenue from tourists who just wanted to know showtimes and parking</li>
+              <li>Staff time consumed by the same five questions, over and over</li>
             </ul>
-        </nav>
-    </header>
+          </div>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Harness AI Power<br>Without the Hype</h1>
-            <p class="hero-subtitle">
-                Practical AI guidance, smart automation, and lightweight tools that make LLMs actually useful. 
-                From education to full-stack development, I meet you where you are and build what you need.
-            </p>
-            <a href="https://calendly.com/ernieatlyd" class="cta-button" target="_blank">Start Your AI Journey</a>
+          <div>
+            <p class="case-section-title">The Solution</p>
+            <ul>
+              <li>Voice agent answers calls 24/7 in English and Spanish</li>
+              <li>Pulls live showtime data from their ticketing system every 30 minutes</li>
+              <li>Takes voicemails, transcribes them, emails them to staff automatically</li>
+              <li>Web dashboard staff can manage without a CS degree</li>
+              <li>Deployed and live in 3 weeks, including bug fixes</li>
+            </ul>
+          </div>
+
+          <div class="case-metrics">
+            <div class="metric">
+              <div class="metric-value">3 wks</div>
+              <div class="metric-label">First conversation to live deployment</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">$35<span style="font-size:1rem">/mo</span></div>
+              <div class="metric-label">vs. ~$2,400/mo for a part-time receptionist</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">&lt;100ms</div>
+              <div class="metric-label">Response time after Redis caching layer</div>
+            </div>
+          </div>
+
+          <div class="case-quote">
+            <blockquote>"Ernie didn't just fix the problem — he gave us something better. Now we have a voice agent that answers calls 24/7 in English and Spanish, tells people what's playing, and even takes voicemails with automatic transcription. It costs us about $35 a month and runs itself."</blockquote>
+            <cite>— Vivian Marthell, CEO &amp; Co-Founder, O Cinema</cite>
+          </div>
+
+          <div class="case-stack">
+            <span class="stack-chip">Vercel Serverless</span>
+            <span class="stack-chip">ElevenLabs</span>
+            <span class="stack-chip">Twilio</span>
+            <span class="stack-chip">Upstash Redis</span>
+            <span class="stack-chip">AgileTix API</span>
+            <span class="stack-chip">TypeScript</span>
+          </div>
         </div>
-    </section>
 
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <h2>About</h2>
-                <div class="about-image">
-                    <div class="headshot-placeholder"><img src="./headshot-linkedin-square.jpg" alt="Ernie Hsiung"></div>
-                </div>
-                <div class="about-text">
-                    <p>I'm Ernie Hsiung—developer, educator, and lifelong explainer of complicated things. My career has taken me from coding at startups and civic tech projects to teaching hundreds of new developers how to build their first web apps—and now, helping people understand and actually use AI without needing a PhD or a VC check.</p>
-                    
-                    <p>I've built journaling tools powered by Large Language Models (LLMs), created custom GPT workflows, and trained everyone from individual entrepreneurs to nonprofit operations teams on practical AI implementation. I combine full-stack development skills with UX design intuition, plus extensive experience explaining complex concepts through digital communication and in-person collaboration.</p>
-                    
-                    <p>People say I'm especially good at translating technical ideas for non-technical people. I say I'm just obsessed with making sure things make sense and work well. If you're unsure about AI, curious but overwhelmed, or want to test something fast, I'd love to help.</p>
-                    
-                    <p class="location-note">I'm based in the Bay Area, but work remotely with clients everywhere. You can reach out directly via the contact form or book a free call to figure out if AI can solve your particular headache.</p>
-                </div>
-            </div>
+        <div class="case-footer">
+          <a href="https://littleyellowdifferent.substack.com/" class="case-link" target="_blank" rel="noopener">Full technical writeup with system diagrams →</a>
+          <a href="https://github.com/ErnieAtLYD/miami-theater-voice-agent" class="case-link" target="_blank" rel="noopener">Open-source repo on GitHub →</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Services Tailored to Your AI Journey</h2>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <p class="section-label">Services</p>
+      <h2 class="section-title">Tailored to Your AI Journey</h2>
 
-            <div class="tab-navigation">
-                <button class="tab-button active" data-tab="entry">
-                    <span class="tab-icon entry"></span>
-                    Entry-Level — Start Here
-                </button>
-                <button class="tab-button" data-tab="core">
-                    <span class="tab-icon core"></span>
-                    Core — Apply & Integrate
-                </button>
-                <button class="tab-button" data-tab="advanced">
-                    <span class="tab-icon advanced"></span>
-                    Advanced — Build & Optimize
-                </button>
-            </div>
+      <div class="tier-tabs" role="tablist">
+        <button class="tier-tab active" role="tab" data-tier="entry" aria-selected="true">Entry — Start Here</button>
+        <button class="tier-tab" role="tab" data-tier="core" aria-selected="false">Core — Apply &amp; Integrate</button>
+        <button class="tier-tab" role="tab" data-tier="advanced" aria-selected="false">Advanced — Build &amp; Optimize</button>
+      </div>
 
-            <div class="tab-content active" id="entry">
-                <div class="service-tier entry">
-                    <div class="tier-header">
-                        <div class="tier-icon entry"></div>
-                        <h3 class="tier-title">Entry-Level — Start Here</h3>
-                    </div>
-                    <div class="service-grid">
-                        <div class="service-card">
-                            <h3><span class="service-icon">🎓</span>AI Literacy & Advisory</h3>
-                            <p class="subtitle">Demystify AI for your team or organization</p>
-                            <div class="ideal-for">Perfect for: AI beginners, leaders, and educators</div>
-                            <ul class="service-features">
-                                <li>Live sessions explaining how LLMs work</li>
-                                <li>Team-wide Q&A and tool context</li>
-                                <li>Clear explanations without hype or fluff</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> When friends or former students ask me, "What even is AI?" I've learned that analogies and real-world demos work better than technical definitions. That's the spirit behind my advisory sessions—no hype, no fluff, just clarity.
-                            </div>
-                        </div>
-                        <div class="service-card">
-                            <h3><span class="service-icon">🛠️</span>AI Training & Enablement</h3>
-                            <p class="subtitle">Hands-on upskilling in real tools and workflows</p>
-                            <div class="ideal-for">Ideal for: Ops teams, marketers, educators, curious individuals</div>
-                            <ul class="service-features">
-                                <li>Prompting and AI tool best practices</li>
-                                <li>Role-based workflow training</li>
-                                <li>Live or async formats available</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> In my teaching work, I've helped dozens of students get over their fear of using AI tools. What unlocked it? Giving them prompt templates <em>for their actual workflows</em>, not hypothetical ones. That insight now powers my workshops.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="core">
-                <div class="service-tier core">
-                    <div class="tier-header">
-                        <div class="tier-icon core"></div>
-                        <h3 class="tier-title">Core — Apply & Integrate</h3>
-                    </div>
-                    <div class="service-grid">
-                        <div class="service-card">
-                            <h3><span class="service-icon">⚡</span>AI Workflow Automation</h3>
-                            <p class="subtitle">Save time by automating repetitive work with LLMs</p>
-                            <div class="ideal-for">Ideal for: Solopreneurs, ops leads, and busy teams</div>
-                            <ul class="service-features">
-                                <li>Automate content, tagging, reports, and more</li>
-                                <li>n8n, GPT APIs, and no-code flows</li>
-                                <li>Practical setups focused on reducing friction</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> I once had to clean up a web team's onboarding process that spanned Slack, email, and Trello. We used GPT to auto-fill checklists, summarize updates, and cut handoffs by half. The bottleneck wasn't tech—it was friction.
-                            </div>
-                        </div>
-                        <div class="service-card">
-                            <h3><span class="service-icon">🔗</span>AI Tool & Platform Integration</h3>
-                            <p class="subtitle">Add LLM power to the tools you already use</p>
-                            <div class="ideal-for">Ideal for: Teams using Airtable, Obsidian, Notion, CRMs</div>
-                            <ul class="service-features">
-                                <li>Embed GPT into Airtable, Obsidian, Notion, CRMs</li>
-                                <li>API-based integrations + light custom code</li>
-                                <li>Enhance without replacing existing systems</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> For my own note-taking system in Obsidian, I built a local plugin that summarizes daily reflections and surfaces recurring themes—powered by GPT-4. The same architecture works for teams who use Notion, Airtable, or even spreadsheets.
-                            </div>
-                        </div>
-                        <div class="service-card">
-                            <h3><span class="service-icon">🗺️</span>AI Readiness & Roadmapping</h3>
-                            <p class="subtitle">Find the high-impact, low-risk AI opportunities in your org</p>
-                            <div class="ideal-for">Ideal for: Team leads, founders, department heads</div>
-                            <ul class="service-features">
-                                <li>Workflow audit + interviews</li>
-                                <li>Use case discovery + rollout plan</li>
-                                <li>Clear, strategic, LLM-first recommendations</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> A former team lead once told me, "I know I should use AI, I just don't want to waste time on the wrong thing." That's what this service is for: mapping real workflows, finding low-risk wins, and building a phased plan based on what's actually useful—not what's trending.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="advanced">
-                <div class="service-tier advanced">
-                    <div class="tier-header">
-                        <div class="tier-icon advanced"></div>
-                        <h3 class="tier-title">Advanced — Build & Optimize</h3>
-                    </div>
-                    <div class="service-grid">
-                        <div class="service-card">
-                            <h3><span class="service-icon">🚀</span>Custom AI Solution Development</h3>
-                            <p class="subtitle">Prototype and build AI-powered tools from scratch</p>
-                            <div class="ideal-for">Ideal for: Startups, innovation teams, internal tools</div>
-                            <ul class="service-features">
-                                <li>Apps, copilots, chatbots, summarizers, etc.</li>
-                                <li>Full-stack builds with OpenAI, LangChain, TypeScript</li>
-                                <li>PoC or Production-tier development</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> Most clients don't need a giant AI system. What they need is a prototype they can test in real workflows. My builds often start with a simple LLM + front-end setup, then grow based on real usage. That's what I did for my journaling plugin—and it's how I work with clients, too.
-                            </div>
-                        </div>
-                        <div class="service-card">
-                            <h3><span class="service-icon">🔍</span>AI Process Audits & Optimization</h3>
-                            <p class="subtitle">Identify inefficiencies and improve them with AI</p>
-                            <div class="ideal-for">Ideal for: Time-strapped teams and ops managers</div>
-                            <ul class="service-features">
-                                <li>Process review and automation opportunities</li>
-                                <li>Implementation roadmap and follow-up options</li>
-                                <li>Focus on reducing friction, not just adding tech</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> I once had to clean up a web team's onboarding process that spanned Slack, email, and Trello. We used GPT to auto-fill checklists, summarize updates, and cut handoffs by half. The bottleneck wasn't tech—it was friction. That's what these audits uncover.
-                            </div>
-                        </div>
-                        <div class="service-card">
-                            <h3><span class="service-icon">🛡️</span>AI Ethics & Responsible Use Consulting</h3>
-                            <p class="subtitle">Make sure your AI usage is safe and values-aligned</p>
-                            <div class="ideal-for">Ideal for: Education, healthcare, nonprofits, mission-driven orgs</div>
-                            <ul class="service-features">
-                                <li>Privacy, fairness, human-in-the-loop design</li>
-                                <li>Support for sensitive sectors and compliance</li>
-                                <li>Build trust with your users and team</li>
-                            </ul>
-                            <div class="story-snapshot">
-                                <strong>Story Snapshot:</strong> Working in civic tech and education taught me how easy it is to "move fast and break trust." With AI, that risk multiplies. I help clients think through privacy, transparency, and what <em>not</em> to automate—so you build tools your users can believe in.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Entry -->
+      <div class="tier-panel active" id="tier-entry">
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-icon">🎓</span>
+            <p class="service-name">AI Literacy &amp; Advisory</p>
+            <p class="service-for">Perfect for: AI beginners, leaders, and educators</p>
+            <p class="service-desc">Demystify AI for your team or organization — no hype, no fluff, just clarity.</p>
+            <ul class="service-bullets">
+              <li>Live sessions explaining how LLMs work</li>
+              <li>Team-wide Q&amp;A and tool context</li>
+              <li>Clear explanations without jargon</li>
+            </ul>
+            <p class="service-snapshot">When friends or former students ask "What even is AI?" I've learned that analogies and real-world demos work better than technical definitions. That's the spirit here.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🛠️</span>
+            <p class="service-name">AI Training &amp; Enablement</p>
+            <p class="service-for">Ideal for: Ops teams, marketers, educators, curious individuals</p>
+            <p class="service-desc">Hands-on upskilling in real tools and workflows — not hypothetical ones.</p>
+            <ul class="service-bullets">
+              <li>Prompting and AI tool best practices</li>
+              <li>Role-based workflow training</li>
+              <li>Live or async formats available</li>
+            </ul>
+            <p class="service-snapshot">What unlocked it for dozens of students? Prompt templates built around their actual workflows. That insight now powers my workshops.</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <section class="cta-section" id="contact">
-        <div class="container">
-            <h2>Not sure where to start? Let's talk.</h2>
-            <p>I offer free 30-minute consultations to help you figure out if AI is a fit—and if I'm the right person to help.</p>
-            
-            <div class="contact-options">
-                <div class="contact-form-container">
-                    <h3>Send me a message</h3>
-                    <form action="https://formspree.io/f/meokbylo" method="POST" class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">How can I help you?</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Tell me about your situation, challenges, or what you're hoping to accomplish with AI..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="form-submit-btn">Send Message</button>
-                    </form>
-                </div>
-                
-                <div class="direct-contact">
-                    <h3>Or schedule a call</h3>
-                    <div class="cta-buttons"> 
-                        <a href="https://calendly.com/ernieatlyd" class="cta-button primary" target="_blank">Book a Free Consultation</a>
-                        <a href="mailto:e@erniehsiung.com" class="cta-button secondary">Email Me</a>
-                    </div>
-                    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
-                        30-minute intro calls • No sales pitch • Just practical advice
-                    </p>
-                </div>
+      <!-- Core -->
+      <div class="tier-panel" id="tier-core">
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-icon">⚡</span>
+            <p class="service-name">AI Workflow Automation</p>
+            <p class="service-for">Ideal for: Solopreneurs, ops leads, and busy teams</p>
+            <p class="service-desc">Save time by automating repetitive work with LLMs. Practical setups focused on reducing friction.</p>
+            <ul class="service-bullets">
+              <li>Automate content, tagging, reports, and more</li>
+              <li>n8n, GPT APIs, and no-code flows</li>
+              <li>Integrate without replacing what already works</li>
+            </ul>
+            <p class="service-snapshot">I once helped a web team whose onboarding spanned Slack, email, and Trello. We used GPT to auto-fill checklists and cut handoffs by half. The bottleneck wasn't tech — it was friction.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🔗</span>
+            <p class="service-name">AI Tool &amp; Platform Integration</p>
+            <p class="service-for">Ideal for: Teams using Airtable, Obsidian, Notion, CRMs</p>
+            <p class="service-desc">Add LLM power to the tools you already use — without replacing them.</p>
+            <ul class="service-bullets">
+              <li>Embed GPT into Airtable, Obsidian, Notion, CRMs</li>
+              <li>API-based integrations + light custom code</li>
+              <li>Enhance without disrupting existing systems</li>
+            </ul>
+            <p class="service-snapshot">For my own Obsidian setup, I built a plugin that summarizes daily reflections and surfaces recurring themes via GPT-4. The same architecture works for teams on Notion, Airtable, or spreadsheets.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🗺️</span>
+            <p class="service-name">AI Readiness &amp; Roadmapping</p>
+            <p class="service-for">Ideal for: Team leads, founders, department heads</p>
+            <p class="service-desc">Find the high-impact, low-risk AI opportunities in your org before committing to anything.</p>
+            <ul class="service-bullets">
+              <li>Workflow audit + stakeholder interviews</li>
+              <li>Use case discovery + phased rollout plan</li>
+              <li>Clear, strategic, LLM-first recommendations</li>
+            </ul>
+            <p class="service-snapshot">"I know I should use AI, I just don't want to waste time on the wrong thing." That's what this is for: mapping real workflows, finding low-risk wins, and building a plan based on what's actually useful.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced -->
+      <div class="tier-panel" id="tier-advanced">
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-icon">🚀</span>
+            <p class="service-name">Custom AI Solution Development</p>
+            <p class="service-for">Ideal for: Startups, innovation teams, internal tools</p>
+            <p class="service-desc">Prototype and build AI-powered tools from scratch — from PoC to production-ready.</p>
+            <ul class="service-bullets">
+              <li>Apps, copilots, chatbots, voice agents, summarizers</li>
+              <li>Full-stack builds with OpenAI, LangChain, TypeScript</li>
+              <li>Start simple, scale based on real usage</li>
+            </ul>
+            <p class="service-snapshot">Most clients don't need a giant AI system — they need a prototype they can test in real workflows. That's what I built for O Cinema: a voice agent live in three weeks for $35/month.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🔍</span>
+            <p class="service-name">AI Process Audits &amp; Optimization</p>
+            <p class="service-for">Ideal for: Time-strapped teams and ops managers</p>
+            <p class="service-desc">Identify inefficiencies and improve them with AI. Focus on reducing friction, not just adding tech.</p>
+            <ul class="service-bullets">
+              <li>Process review and automation opportunity mapping</li>
+              <li>Implementation roadmap and follow-up options</li>
+              <li>Measured against real time and cost savings</li>
+            </ul>
+            <p class="service-snapshot">The gap between "this seems impossible" and "we can build this for $40/month" is often just someone willing to bridge technical solutions with real-world problems.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🛡️</span>
+            <p class="service-name">AI Ethics &amp; Responsible Use Consulting</p>
+            <p class="service-for">Ideal for: Education, healthcare, nonprofits, mission-driven orgs</p>
+            <p class="service-desc">Make sure your AI usage is safe, transparent, and values-aligned.</p>
+            <ul class="service-bullets">
+              <li>Privacy, fairness, human-in-the-loop design</li>
+              <li>Support for sensitive sectors and compliance concerns</li>
+              <li>What <em>not</em> to automate matters as much as what to automate</li>
+            </ul>
+            <p class="service-snapshot">Working in civic tech and education taught me how easy it is to "move fast and break trust." With AI, that risk multiplies. I help clients think through the places where speed isn't actually an asset.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p class="section-label">Contact</p>
+          <h2 class="section-title">Not Sure Where to Start?<br />Let's Talk.</h2>
+          <p>I offer free 30-minute consultations to help you figure out if AI is a fit — and if I'm the right person to help. No sales pitch. Just practical advice.</p>
+          <div class="contact-options">
+            <a href="https://calendly.com/ernieatlyd" class="contact-option" target="_blank" rel="noopener">
+              <span class="icon">📅</span>
+              Book a Free 30-Min Call
+            </a>
+            <a href="mailto:e@erniehsiung.com" class="contact-option">
+              <span class="icon">✉️</span>
+              e@erniehsiung.com
+            </a>
+          </div>
+        </div>
+        <div>
+          <form action="https://formspree.io/f/xdalpwqr" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
             </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">How can I help?</label>
+              <textarea id="message" name="message" placeholder="Tell me what you're working on or stuck on..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </form>
         </div>
-    </section>ll
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Ernie Hsiung. Practical AI solutions without the hype.</p>
-        </div>
-    </footer>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Ernie Hsiung · <a href="mailto:e@erniehsiung.com">e@erniehsiung.com</a> · Practical AI solutions without the hype.</p>
+  </footer>
 
-    <script>
-        // Minimal JavaScript - just smooth scrolling and tabs
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling
-            const links = document.querySelectorAll('a[href^="#"]');
-            for (let i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            }
-
-            // Tab functionality
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].addEventListener('click', function() {
-                    const targetTab = this.getAttribute('data-tab');
-                    
-                    // Remove active class from all buttons and contents
-                    for (let j = 0; j < tabButtons.length; j++) {
-                        tabButtons[j].classList.remove('active');
-                    }
-                    for (let k = 0; k < tabContents.length; k++) {
-                        tabContents[k].classList.remove('active');
-                    }
-                    
-                    // Add active class to clicked button and corresponding content
-                    this.classList.add('active');
-                    const targetContent = document.getElementById(targetTab);
-                    if (targetContent) {
-                        targetContent.classList.add('active');
-                    }
-                });
-            }
+  <script>
+    // Tier tab switching
+    document.querySelectorAll('.tier-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tier-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
         });
-    </script>
+        document.querySelectorAll('.tier-panel').forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById('tier-' + tab.dataset.tier).classList.add('active');
+      });
+    });
+
+    // Subtle scroll-in for service cards
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(12px)';
+          setTimeout(() => {
+            entry.target.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .case-study-card').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
